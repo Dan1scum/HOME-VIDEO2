@@ -3,7 +3,6 @@
 
 
 
-# hw1.py
 
 class Phone:
     """
