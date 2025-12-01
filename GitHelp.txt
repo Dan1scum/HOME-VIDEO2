@@ -1,0 +1,12 @@
+Команды для регистрации данных
+git config --global user.name "Dan1scum"
+git config --global user.email "belizer808@gmail.com"
+==================================================================
+git init
+git remote add origin https://github.com/Dan1scum/HOME-VIDEO2.git
+==================================================================
+
+
+
+
+git status
