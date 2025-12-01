@@ -57,6 +57,7 @@ print(phone3.info())
 
 
 
+
 # class Hero:
 #     def __init__(self, name, lvl, hp): # конструктор класса
 #         # Атрибуты класса
