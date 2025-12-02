@@ -11,6 +11,7 @@ git remote add origin https://github.com/Dan1scum/HOME-VIDEO2.git
 
 git status
 git add .
+git add
 git commit -m "same text"
-
+git push orirgin master
 
