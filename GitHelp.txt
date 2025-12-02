@@ -13,5 +13,5 @@ git status
 git add .
 git add
 git commit -m "same text"
-git push orirgin master
+git push origin master
 
