@@ -14,11 +14,17 @@ git add .
 git add
 git commit -m "same text"
 git push origin master
+
 git rm -r название дериктории
 git branch посмотреть ветки
 git branch название_ветки
 git merge название ветки
+
 git switch название ветки  -для переключения на ветку
 git checkout название ветки
 git checkout -b название ветки
 git switch -c название ветки для создания ветки и переключения на нее
+
+git restore путь  откат изменений
+git reset --mixed HEAD~1  удаление последнего комита
+
