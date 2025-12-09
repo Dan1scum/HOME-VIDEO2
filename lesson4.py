@@ -1,6 +1,8 @@
 # Закрепление пройденного материала - Использование ООП в проекте
 
 
+from abc import ABC, abstractmethod
+
 
 class Hero:
     def __init__(self, name, lvl, hp):
@@ -11,17 +13,18 @@ class Hero:
     def action(self):
         return f'{self.name} готов в бою!'
 
-class MagicHero(Hero):
 
+class MagicHero(Hero):
     def __init__(self, name, lvl, hp, mp):
         super().__init__(name, lvl, hp)
         self.mp = mp
 
-    def cast_spell(self):
+    def action(self):
         return f"Маг {self.name} кастует заклинание! MP: {self.mp}"
 
+
 class WarriorHero(Hero):
-    def attack(self):
+    def action(self):
         return f"Воин {self.name} рубит мечом! Уровень: {self.lvl}"
 
 
@@ -33,21 +36,29 @@ class BankAccount:
         self.__password = password
 
     def login(self, password):
-        if password == "absolute":
-            print(f"Успешно вошли в систему {self.name}")
-        else:
-            print("пошел нх!!!!!!!")
+        return password == self.__password
 
     def full_info(self):
-
-
+        return f"Герой: {self.hero.name}, Баланс: {self._balance}"
 
     def get_bank_name(self):
+        return self.bank_name
 
+    def bonus_for_level(self):
+        return self.hero.lvl * 10
 
+    def __str__(self):
+        return f"{self.hero.name} | Баланс: {self._balance} SOM"
 
-    def bonus_for_level(self):      # пока все сырое
-        return 'fy'
+    def __add__(self, other):
+        if type(self.hero) is not type(other.hero):
+            return "Ошибка: Нельзя сложить счета героев разных классов!"
+        else:
+            return self._balance + other._balance
+
+    def __eq__(self, other):
+        return (self.hero.name == other.hero.name and self.hero.lvl == other.hero.lvl)
+
 
 
 
@@ -70,6 +81,7 @@ print(acc2)
 
 # --- Классовые и статические методы ---
 print("Банк:", acc1.get_bank_name())
+print("Бонусы за уровень:", a)
 
 
 
