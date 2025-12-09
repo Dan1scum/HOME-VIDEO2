@@ -76,9 +76,9 @@ mage1 = MagicHero("Merlin", 80, 500, 150)
 mage2 = MagicHero("Merlin", 80, 500, 200)
 warrior = WarriorHero("Conan", 50, 900, 20)
 
-acc1 = BankAccount(mage1, 5000, "1234")
-acc2 = BankAccount(mage2, 3000, "0000")
-acc3 = BankAccount(warrior, 2500, "1111")
+acc1 = BankAccount(mage1, 5000, "1234", "Simba")
+acc2 = BankAccount(mage2, 3000, "0000", "Simba")
+acc3 = BankAccount(warrior, 2500, "1111", "Simba")
 
 print(mage1.action())
 print(warrior.action())
