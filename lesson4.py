@@ -23,17 +23,17 @@ class MagicHero(Hero):
         return f"Маг {self.name} кастует заклинание! MP: {self.mp}"
 
 
-class WarriorHero(Hero):
+class WarriorHero(MagicHero):
     def action(self):
         return f"Воин {self.name} рубит мечом! Уровень: {self.lvl}"
 
 
 class BankAccount:
-    def __init__(self, hero, bank_name, balance, password):
+    def __init__(self, hero, balance, password, bank_name):
         self.hero = hero
-        self.bank_name = bank_name
         self._balance = balance
         self.__password = password
+        self.bank_name = bank_name
 
     def login(self, password):
         return password == self.__password
@@ -60,8 +60,15 @@ class BankAccount:
         return (self.hero.name == other.hero.name and self.hero.lvl == other.hero.lvl)
 
 
+class SmsService(ABC):
 
+    @abstractmethod
+    def send_otp(self, phone):
+        pass
 
+class KGSms(SmsService):
+    def send_otp(self, phone):
+        return {"text": "Код: 1234", "phone": phone}
 
 
 
@@ -81,7 +88,18 @@ print(acc2)
 
 # --- Классовые и статические методы ---
 print("Банк:", acc1.get_bank_name())
-print("Бонусы за уровень:", a)
+print("Бонус за уровень:", acc1.bonus_for_level(), "SOM")
+
+print("\n=== Проверка add ===")
+print("Сумма счетов двух магов:", acc1 + acc2)
+print("Сумма мага и воина:", acc1 + acc3)
+
+print("\n=== Проверка eq ===")
+print("Mage1 == Mage2 ?", acc1 == acc2)
+print("Mage1 == Warrior ?", acc1 == acc3)
+
+sms = KGSms()
+print("\n", sms.send_otp("+996777123456"))
 
 
 
