@@ -1,6 +1,45 @@
 # Виртуальная среда, встроенные модули Python, определение собственных модулей, внешние модули и их установка, Основы GIT.
 
 
+def log_action(func):
+    def wrapper(*args, **kwargs):
+        print(f"Выполняется действие: {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+
+class Mage:
+    def __init__(self, name, mana):
+        self.name = name
+        self.mana = mana
+
+    @classmethod
+    def frieren(cls):
+        return cls("Frieren", 1000)
+
+    @staticmethod
+    def is_legendary(mana):
+        return mana >= 500
+
+    @log_action
+    def cast_spell(self):
+        print(f"{self.name} использует магию (мана: {self.mana})")
+
+
+mage1 = Mage.frieren()
+mage2 = Mage("Fern", 300)
+
+mage1.cast_spell()
+mage2.cast_spell()
+
+print(Mage.is_legendary(mage1.mana))  # True
+print(Mage.is_legendary(mage2.mana))  # False
+
+
+
+
+
+
 command = {
     "admin": ["start", "ban", "stop"],
     "user": ["start", "message"]
