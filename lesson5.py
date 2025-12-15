@@ -1,6 +1,76 @@
 # Виртуальная среда, встроенные модули Python, определение собственных модулей, внешние модули и их установка, Основы GIT.
 
 
+command = {
+    "admin": ["start", "ban", "stop"],
+    "user": ["start", "message"]
+}
+
+
+class User:
+    def __init__(self, username, role):
+        self.username = username
+        self.role = role
+
+    def __str__(self):
+        return f"{self.username} ({self.role})"
+
+
+def command_access(command_name):
+    def decorator(func):
+        def wrapper(self, user: User, *args, **kwargs):
+            if command_name not in command.get(user.role, []):
+                print(f'Пользователь {user.username} не может выполнять команду "{command_name}"')
+                return
+
+            print(f'Пользователь {user.username} ({user.role}) выполняет команду {command_name}')
+            return func(self, user, *args, **kwargs)
+
+        return wrapper
+    return decorator
+
+
+class CommandHandler:
+
+    @command_access("start")
+    def start(self, user):
+        print("Система запущена")
+
+    @command_access("ban")
+    def ban(self, user):
+        print("Пользователь заблокирован")
+
+    @command_access("stop")
+    def stop(self, user):
+        print("Система остановлена")
+
+    @command_access("message")
+    def message(self, user):
+        print("Пользователь отправил сообщение")
+
+
+if __name__ == "__main__":
+    handler = CommandHandler()
+
+    user1 = User("Alice", "admin")
+    user2 = User("Bob", "user")
+
+    # Админ
+    handler.start(user1)
+    handler.ban(user1)
+    handler.stop(user1)
+
+    print()
+
+    # Обычный пользователь
+    handler.start(user2)
+    handler.ban(user2)
+    handler.message(user2)
+
+
+
+
+
 # Статик метод
 # class Math:
 #     @staticmethod
@@ -87,21 +157,20 @@
 # greeting_name('Danislam')
 
 
-def class_decorator(cls):
-    class NewClass(cls):
-
-        def new_method(self):
-            return 'Я новый метод'
-    return NewClass
-
-@class_decorator
-class OldClass:
-    def old_method(self):
-        return 'Я старый метод'
-
-obj_1 = OldClass
-
-print(type(obj_1))
+# def class_decorator(cls):
+#     class NewClass(cls):
+#
+#         def new_method(self):
+#             return 'Я новый метод'
+#     return NewClass
+#
+# @class_decorator
+# class OldClass:
+#     def old_method(self):
+#         return 'Я старый метод'
+#
+# obj_1 = OldClass
+# print(type(obj_1))
 
 
 
