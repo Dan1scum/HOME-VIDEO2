@@ -24,7 +24,7 @@ connect.commit()
 def create_user(name, age, hobby=None):
     # cursor.execute(
     #     f'INSERT INTO users(name, age, hobby) VALUES("{name}", "{age}", "{hobby}")'
-    # )
+    # ))
     cursor.execute(
         'INSERT INTO users(name, age, hobby) VALUES(?, ?, ?)',
         (name, age, hobby)
@@ -32,5 +32,36 @@ def create_user(name, age, hobby=None):
     connect.commit()
     print(f'Пользователь добавлен {name}!!')
 
-# create_user('Danislam', 22, 'Everest')
+# create_user('Danis', 25, 'GOD')
 
+
+def get_users():
+    cursor.execute('SELECT * FROM users')
+    users = cursor.fetchmany(3)
+    # print(users)
+    for i in users:
+        print(f"NAME: {i[0]} AGE: {i[1]} HOBBY: {i[2]}")
+
+# get_users()
+
+
+def update_users_name(row_id, name):
+    cursor.execute(
+        'UPDATE users SET hobby = ? WHERE rowid = ?',
+        (name, row_id)
+    )
+    connect.commit()
+    print('Пользователь обнавлен')
+
+# update_users_name(2, 'Любит горы летом')
+
+
+def delete_user(row_id):
+    cursor.execute(
+        'DELETE FROM users WHERE rowid = ?',
+        (row_id,)
+    )
+    connect.commit()
+    print('Пользователь удален!!')
+
+delete_user(2)
