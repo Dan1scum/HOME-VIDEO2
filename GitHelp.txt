@@ -28,3 +28,13 @@ git switch -c название ветки для создания ветки и 
 git restore путь  откат изменений
 git reset --mixed HEAD~1  удаление последнего комита
 
+
+prod
+
+reseal
+
+
+.venv\Scripts\activate
+
+test
+stage|dev|test
